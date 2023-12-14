@@ -18,9 +18,11 @@ window.addEventListener("load", function () {
         if (numero % 2 === 0) {
             contadorPar++;
             document.getElementById("par").textContent = contadorPar;
+            document.getElementById('nomeNumeroAleatorio').classList.add('corPar');
         } else {
             contadorImpar++;
             document.getElementById("impar").textContent = contadorImpar;
+            document.getElementById('nomeNumeroAleatorio').classList.add('corImpar');
         }
 
         // Atualiza as porcentagens
@@ -47,7 +49,10 @@ window.addEventListener("load", function () {
         const minutos = Math.floor(contagemRegressiva / 60);
         const segundos = contagemRegressiva % 60;
         const exibicao = `${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
+        document.getElementById('nomeNumeroAleatorio').classList.remove('corPar');
+        document.getElementById('nomeNumeroAleatorio').classList.remove('corImpar');
         document.getElementById('timer').textContent = exibicao;
+ 
     }
 
    // Associa o evento de mudança do elemento select ao manipulador de eventos
