@@ -1,0 +1,117 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+#body{
+    background-color: black;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+
+}
+
+.p{
+    color: yellow;
+   
+}
+
+header, footer{
+    
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    color: yellow;
+    height: 50px;
+    left: 0;
+    width: 100%;
+    position: fixed;
+}
+header{
+    top: 0;
+
+}
+footer{
+    bottom: 0;
+}
+
+header>div, footer>div{
+    display: flex;
+    flex-direction: row; 
+    margin: auto;
+   
+}
+
+input{
+    border-radius: 8px;
+    color: rgb(255, 255, 255);
+    width: 80px;
+    height: 30px;
+    margin: auto;
+    border-color: none;
+    background-color: rgb(42, 97, 145);
+    font-size: 15px;
+}
+input:hover{
+    background-color:rgb(255, 255, 255);
+    color:  rgb(42, 97, 145);
+}
+
+input:active{
+   transform: scale(1.1);
+}
+
+span{
+    color: rgb(255, 255, 255);
+    padding-left: 10px;
+}
+option{
+    font-size: 15px;
+}
+.selecionar{ 
+    margin-left: 10px;
+    border-radius: 8px;
+    width: 100px;
+    height: 30px;
+    background-color: rgb(235, 245, 173);
+    font-size: 15px;
+}
+label{
+    margin: auto;
+}
+
+
+
+main{
+    width: 100%;
+    height: 100%;
+}
+.numero{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    
+}
+
+
+.numeroSorteado{
+    font-size: 300px;
+ 
+}
+
+
+.corPar{
+    color: rgb(228, 253, 2);
+  }.corImpar {
+    color: red;
+  }#numeroSorteado div span{
+    color: white;
+  }
