@@ -11,7 +11,9 @@
 <body>
     <header>
         <div>
-            <select id="selectDificuldade" class="selecionar">
+            <label for="">Nivel</label>
+            <select id="dificuldade" class="selecionar" >
+                <option value="selecionar">Selecionar</option>
                 <option value="facil">Fácil</option>
                 <option value="medio">Médio</option>
                 <option value="dificil">Difícil</option>
@@ -21,40 +23,43 @@
 
         <div>
             <p>Tempo</p>
-            <span id="timer">00:30</span>
+            <span id="timer">00:00</span>
         </div>
 
 
         <div>
             <nav>
-                <input type="button" value="Play" id="btnPlay">
-                <input type="button" value="Pause" id="btnPause">
-                <input type="button" value="Stop" id="btnStop">
+                <input type="button" value="Iniciar" id="btnIniciar">
+                <input type="button" value="Pausar" id="btnPausar">
+                <input type="button" value="Parar" id="btnParar">
             </nav>
         </div>
     </header>
 
     <main>
         <div class="numero">
-            <p class="numeroSorteado" id="nomeNumeroAleatorio">--</p>
+            <p class="numeroSorteado" id="numeroSorteador">-</p>
         </div>
     </main>
 
 
     <footer>
         <div>
-            <p>PAR</p>
+            <p>ACERTOS</p>
             <span id="par">0</span>
+            <span>(<span id="percentagemPar">0%</span>)</span>
+            
         </div>
 
         <div>
-            <p>IMPAR</p>
+            <p>ERROS</p>
             <span id="impar">0</span>
         </div>
 
         <div>
             <p>PARES JA SORTEADOS</p>
-            <span id="percentagemPar">0%</span>
+            <span id="todosPares">0</span>
+            
         </div>
     </footer>
 

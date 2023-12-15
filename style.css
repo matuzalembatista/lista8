@@ -115,3 +115,15 @@ main{
   }#numeroSorteado div span{
     color: white;
   }
+
+.corBotaoDesligado{
+    opacity: 80%;
+}
+
+.corBotaoDesligado:hover{
+    background-color:rgb(42, 97, 145);
+    color:  rgb(255, 255, 255);
+}
+.corBotaoDesligado:active{
+    transform: scale(1.0);
+}

@@ -1,195 +1,260 @@
-// Aguarda o carregamento completo da página
+window.onload = function () {
+    document.getElementById("btnPausar").disabled = true;
+    document.getElementById("btnParar").disabled = true;
+    document.getElementById('btnPausar').classList.add('corBotaoDesligado');
+    document.getElementById('btnParar').classList.add('corBotaoDesligado');
+};
+
 window.addEventListener("load", function () {
 
-    // Associa os botões e eventos aos elementos do DOM (HTML)
-   // document.getElementById("btnPlay").addEventListener("click", iniciarCronometro);
-    document.getElementById("btnPlay").addEventListener("click", iniciarCronometro);
-    document.getElementById("btnPause").addEventListener("click", pausarCronometro);
-    document.getElementById("btnStop").addEventListener("click", pararCronometro);
+    document.getElementById("btnIniciar").addEventListener("click", iniciarCronometro);
+    document.getElementById("btnPausar").addEventListener("click", pausarCronometro);
+    document.getElementById("btnParar").addEventListener("click", pararCronometro);
 
-    
+    percentagemPar = document.getElementById("percentagemPar").value;
 
-    // Declaração de variáveis para o contador de números pares e ímpares
-    let contadorPar = 0;
-    let contadorImpar = 0;
+    contadorPar = 0;
+    contadorImpar = 0;
 
-    // Função para verificar se um número é par ou ímpar e atualizar o contador
+    // VERIFICAR NUMEROS PARES / COR DE PAR OU IMPAR
     function verificarEAtualizarParImpar(numero) {
         if (numero % 2 === 0) {
             contadorPar++;
             document.getElementById("par").textContent = contadorPar;
-            document.getElementById('nomeNumeroAleatorio').classList.add('corPar');
+            document.getElementById('numeroSorteador').classList.add('corPar');
         } else {
             contadorImpar++;
             document.getElementById("impar").textContent = contadorImpar;
-            document.getElementById('nomeNumeroAleatorio').classList.add('corImpar');
+            document.getElementById('numeroSorteador').classList.add('corImpar');
         }
 
-        // Atualiza as porcentagens
         atualizarPorcentagens();
     }
 
-    // Adicione um evento de clique ao número sorteado para verificar e atualizar par ou ímpar
-    document.getElementById("nomeNumeroAleatorio").addEventListener("click", function () {
-        const numeroSorteado = parseInt(document.getElementById("nomeNumeroAleatorio").textContent);
+    // EvENTO PARA CLICK NO numeroSORTEADOR  / CHAMA FUNCAO VERITICAR PAR 
+    document.getElementById("numeroSorteador").addEventListener("click", function () {
+        const numeroSorteado = parseInt(document.getElementById("numeroSorteador").textContent);
         verificarEAtualizarParImpar(numeroSorteado);
     });
 
+
     // Declaração de variáveis cronometro
     let intervaloCronometro;
-    let contagemRegressiva = 90; // 1 minuto e 30 segundos em segundos
+    let contagemRegressiva = document.getElementById('dificuldade').value;
     let emAndamento = false;
-
     let cronNrosAleatorios;
 
-    // Inicialmente, desabilita o botão de "Play" e habilita o botão de "Pause" e "Stop"
-    controlarBtns(false, true);
 
+    //CRONOMETRO 
     function atualizarExibicaoCronometro() {
         const minutos = Math.floor(contagemRegressiva / 60);
         const segundos = contagemRegressiva % 60;
         const exibicao = `${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
-        document.getElementById('nomeNumeroAleatorio').classList.remove('corPar');
-        document.getElementById('nomeNumeroAleatorio').classList.remove('corImpar');
+        document.getElementById('numeroSorteador').classList.remove('corPar');
+        document.getElementById('numeroSorteador').classList.remove('corImpar');
         document.getElementById('timer').textContent = exibicao;
- 
     }
 
-   // Associa o evento de mudança do elemento select ao manipulador de eventos
-   document.getElementById("selectDificuldade").addEventListener("change", function () {
-    const selectDificuldade = document.getElementById("selectDificuldade");
-    const valorSelecionado = selectDificuldade.value;
+
+    valorSelecionado = "";
+    dificuldade = document.getElementById('dificuldade');
+    dificuldade.addEventListener('change', function () {
+        const valorSelecionado = dificuldade.value;
 
         if (valorSelecionado === "facil") {
-            contagemRegressiva = 90; // 1 minuto e 30 segundos
+            contagemRegressiva = 90;
+            tempo = 1000;
+            facilBlock();
         } else if (valorSelecionado === "medio") {
-            contagemRegressiva = 60; // 1 minuto
+            dificilBlock();
+            contagemRegressiva = 60;
+            tempo = 500;
         } else if (valorSelecionado === "dificil") {
-            contagemRegressiva = 30; // 30 segundos
+            dificilBlock();
+            contagemRegressiva = 30;
+            tempo = 200;
+        }
+        else if (valorSelecionado === "selecionar") {
+            contagemRegressiva = 0;
+            selecionarBlock();
         }
 
         atualizarExibicaoCronometro();
 
-        // Ajustar o intervalo de sorteio com base na dificuldade
-        const intervaloSorteio = valorSelecionado === "facil" ? 500 : valorSelecionado === "medio" ? 300 : 100;
-
-        // Iniciar o intervalo para exibir números aleatórios
-        cronNrosAleatorios = setInterval(exibirMsg, intervaloSorteio);
-
-        // Habilita o botão "Play" quando a dificuldade é selecionada
-        document.getElementById("btnPlay").disabled = false;
-
-
-
     });
 
-    // Função para iniciar o cronômetro
-    function iniciarCronometro() {
+    //Facil
+    function facilBlock() {
+        document.getElementById("btnParar").disabled = true;
+        document.getElementById("btnPausar").disabled = true;
+        document.getElementById('btnParar').classList.add('corBotaoDesligado');
+        document.getElementById('btnPausar').classList.add('corBotaoDesligado');
+    }
 
-        //Cronometro do tempo
+    function medioBlock() {
+        document.getElementById("btnParar").disabled = true;
+        document.getElementById("btnPausar").disabled = true;
+        document.getElementById('btnParar').classList.add('corBotaoDesligado');
+        document.getElementById('btnPausar').classList.add('corBotaoDesligado');
+    }
+
+    function dificilBlock() {
+        document.getElementById("btnParar").disabled = true;
+        document.getElementById("btnPausar").disabled = true;
+        document.getElementById('btnParar').classList.add('corBotaoDesligado');
+        document.getElementById('btnPausar').classList.add('corBotaoDesligado');
+    }
+
+    function selecionarBlock() {
+        document.getElementById("btnIniciar").disabled = false;
+        document.getElementById('btnIniciar').classList.remove('corBotaoDesligado');
+        document.getElementById("btnParar").disabled = true;
+        document.getElementById("btnPausar").disabled = true;
+        document.getElementById('btnParar').classList.add('corBotaoDesligado');
+        document.getElementById('btnPausar').classList.add('corBotaoDesligado');
+    }
+
+
+    // BOTAO INICIAR
+    function iniciarCronometro() {
         if (!emAndamento) {
             intervaloCronometro = setInterval(function () {
+
                 contagemRegressiva--;
 
                 atualizarExibicaoCronometro();
-
-                if (contagemRegressiva === 0) {
+                if (contagemRegressiva == 0) {
                     clearInterval(intervaloCronometro);
                     emAndamento = false;
-
                 }
             }, 1000);
             emAndamento = true;
-        } // fim do controle de tempo
+        }
+        btnIniciarBlock();
 
-        // Habilita o botão de "Play" e desabilita o botão de "Pause"
-       controlarBtns(true, false,);
-     
-
-
-        // Inicia um intervalo para exibir números aleatórios a cada 500ms
-        cronNrosAleatorios = setInterval(exibirMsg, 500);
-
+    
+            intervaloSorteio=tempo;
+            cronNrosAleatorios = setInterval(gerarNumeroAleatorio, intervaloSorteio);
+         
+    }
 
 
+    
+    setInterval(ifTeste, 1000)
+    function ifTeste() {
+        numeroTimer = parseInt(document.getElementById("timer").value);
+
+        if (numeroTimer > 0) {
+            if (emAndamento) {
+                clearInterval(intervaloCronometro);
+                emAndamento = false;
+            }
+            clearInterval(cronNrosAleatorios);
+        } numeroTimer++;
+        //clearInterval(cronNrosAleatorios);
 
     }
 
-    // Função para pausar o cronômetro
+
+    // BOTAO PAUSAR
     function pausarCronometro() {
-        //Cronometro do tempo pausar
+        btnPausarBLock();
         if (emAndamento) {
             clearInterval(intervaloCronometro);
             emAndamento = false;
-        } // fim do controle de tempo pausar
-
-        // Desabilita o botão de "Play" e habilita o botão de "Pause"
-        controlarBtns(false, true); //verificar
-
-
-        // Para o intervalo de geração de números aleatórios
+        }
         clearInterval(cronNrosAleatorios);
-
-
-
     }
-    // Função para parar o cronômetro
-    function pararCronometro() {
 
+    // BOTAO PARAR
+    function pararCronometro() {
         clearInterval(intervaloCronometro);
         emAndamento = false;
         contagemRegressiva = 90;
+
         atualizarExibicaoCronometro();
-        // fim do controle de tempo parar
+        btnPararBlock();
 
 
-        // Desabilita o botão de "Play" e habilita o botão de "Pause"
-        controlarBtns(false, true);
+        document.getElementById("dificuldade").value = 'selecionar';
+
+        document.getElementById("percentagemPar").textContent = "0%";
+        document.getElementById("impar").textContent = 0;
+        document.getElementById("todosPares").textContent = 0;
+
 
         // Para o intervalo de geração de números aleatórios
         clearInterval(cronNrosAleatorios);
 
         // Zera os contadores de números pares e ímpares
         contadorPar = 0;
-        contadorImpar = 0;
         document.getElementById("par").textContent = contadorPar;
-        document.getElementById("impar").textContent = contadorImpar;
 
-        // Zera as porcentagens
-
-        document.getElementById("percentagemPar").textContent = "Porcentagem de acertos em números pares: 0%";
-        document.getElementById("percentagemImpar").textContent = "Porcentagem de acertos em números ímpares: 0%";
-
-        // Zera o número sorteado
-
-        document.getElementById("nomeNumeroAleatorio").textContent = "0";
+        document.getElementById("numeroSorteador").textContent = "-";
+        document.getElementById("timer").innerHTML = "00:00";
+        location.reload();
 
     }
 
+    //Bloqueio de BTNs
+    function btnIniciarBlock() {
+        document.getElementById("btnIniciar").disabled = true;
+        document.getElementById('btnIniciar').classList.add('corBotaoDesligado');
+        document.getElementById("btnParar").disabled = false;
+        document.getElementById('btnParar').classList.remove('corBotaoDesligado');
+        document.getElementById("btnPausar").disabled = false;
+        document.getElementById('btnPausar').classList.remove('corBotaoDesligado');
+    }
 
-    // Função para controlar a habilitação dos botões
-    function controlarBtns(play, pause, stop) {
-        document.getElementById("btnPlay").disabled = play;
-        document.getElementById("btnPause").disabled = pause;
-        document.getElementById("btnStop").disabled = stop;
-
-
+    function btnPausarBLock() {
+        document.getElementById("btnIniciar").disabled = false;
+        document.getElementById('btnIniciar').classList.remove('corBotaoDesligado');
+        document.getElementById("btnParar").disabled = false;
+        document.getElementById('btnParar').classList.remove('corBotaoDesligado');
+        document.getElementById("btnPausar").disabled = true;
+        document.getElementById('btnPausar').classList.add('corBotaoDesligado');
 
     }
 
-    // Função para exibir um número aleatório
-    function exibirMsg() {
-        document.getElementById("nomeNumeroAleatorio").innerHTML = parseInt(Math.random() * 1000) + 1;
+    function btnPararBlock() {
+        document.getElementById("btnIniciar").disabled = true;
+        document.getElementById('btnIniciar').classList.remove('corBotaoDesligado');
+        document.getElementById("btnParar").disabled = true;
+        document.getElementById('btnParar').classList.add('corBotaoDesligado');
+        document.getElementById("btnPausar").disabled = true;
+        document.getElementById('btnPausar').classList.add('corBotaoDesligado');
     }
-      // Função para atualizar as porcentagens de acertos e erros
-      function atualizarPorcentagens() {
+
+
+    // NUMERO ALEATORIO
+    function gerarNumeroAleatorio() {
+        numero = document.getElementById("numeroSorteador").innerHTML = parseInt(Math.random() * 100) + 1;
+    }
+
+
+    function incrementarContadorSeSorteado() {
+        const todosPares = gerarNumeroAleatorio(); // Gera um número aleatório entre 1 e 100
+        if (todosPares % 2 === 0) {
+            contador++;
+            document.getElementById("todosPares").innerHTML = contador;
+        }
+    }
+
+
+    contadorPar = 0;
+    // ATUALIZAR PORCENTAGEM
+    function atualizarPorcentagens() {
         const totalTentativas = contadorPar + contadorImpar;
         const percentagemPar = (contadorPar / totalTentativas) * 100;
         const percentagemImpar = (contadorImpar / totalTentativas) * 100;
-        
-        document.getElementById("percentagemPar").textContent = `Porcentagem de acertos em números pares: ${percentagemPar.toFixed(2)}%`;
-        document.getElementById("percentagemImpar").textContent = `Porcentagem de acertos em números ímpares: ${percentagemImpar.toFixed(2)}%`;
+
+        contadorPar++;
+        document.getElementById("percentagemPar").textContent = `${percentagemPar.toFixed(2)}%`;
+
     }
+
+
+
 });
 
 
